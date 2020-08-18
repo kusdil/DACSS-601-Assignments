@@ -1,0 +1,94 @@
+---
+title: '**DACSS 601 / PS 601 - Assignment Four**'
+author: '*Mustafa Erdem Kusdil*'
+date: "August 14, 2020"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, echo=FALSE, warning = FALSE, message = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+
+
+mydata <- read.delim("covid-responses.tab", sep= "\t", header = TRUE)
+
+```
+
+
+
+## Variables
+The first variable is a self-reported behavior variable. It measures the respondents’ behavior on attending social gatherings in the times of Covid-19 pandemic. The variable is measured through a level of agreement with the statement of “I did not attend social gatherings”. Respondents report their intended behaviors through the “0 = Does not apply at all” to “100 = Applies very much” scale and the variable is coded as such. 
+
+
+
+```{r desc1, echo=FALSE, warning = FALSE, message = FALSE}
+
+summary(mydata$SelfReported_Behavio_2)
+
+
+ggplot(mydata, aes(SelfReported_Behavio_2)) +
+  geom_bar()+
+   labs(subtitle = "",
+       x="Not Attending Social Gatherings",
+       y="Count",
+       title="")
+
+
+```
+
+
+
+
+
+The second variable is a variable that measures the respondents’ impression of another group of individuals' expected behavior. The variable measures the Italian people’s impression of British people and how their response to the cancellation of social gatherings would be in Covid-19 pandemic. Measurement is similar to the first variable and it is measured through an agreement to the statement of “How many of 100 people in the UK do you think believe that participation at social gatherings should be cancelled because of the coronavirus right now?”. The answer scale is “0” to “100”. Each number representing the percentage of British people.
+
+```{r desc3, echo=FALSE, warning = FALSE, message = FALSE}
+
+
+
+summary(mydata$SOB_1)
+
+
+ggplot(mydata, aes(SOB_1)) +
+  geom_bar()+
+ labs(subtitle = "",
+       x="The UK Would Cancel Social Gatherings",
+       y="Count",
+       title="")
+
+```
+
+
+## Relationship Between the Variables
+
+I hypothesize that Italian individuals who did not attend social gatherings in the time of Covid-19 would believe that most of the British people would support to cancel participating at social gatherings because of the Covid-19 crisis. I believe, the two variables I’ve chosen can represent a strong and positive correlation regarding the individuals’ personal positions and their impressions of others. Therefore:
+
+H1: Individuals who were not likely to attend social gatherings in Covid-19 pandemic would have a positive correlation with the indivudals who think that British would like to cancel the participation at social gatherings because of Covid-19.
+
+
+
+## Demonstration
+
+The visualization below shows the relationship between the variables in our sample. The scatters are jittered the show the distribution more clearly. It is possible to see the hypothesized relationship between the variables. However, as the correlation coefficient and visualization tells us, the correlation between the variables are not very strong. The observations are showing a positive tendency, but they are very much dispersed along the plot. The coefficient is "0.21" this shows a positive, but relatively weak correlation. Therefore, we can state that the hypothesis is partially supported.
+
+
+
+```{r visualisation, echo=FALSE, warning = FALSE, message = FALSE}
+
+mydata%>%
+  summarise(Correlation = cor(SelfReported_Behavio_2, SOB_1,  use= "complete.obs"))
+
+
+ggplot(mydata, aes( SelfReported_Behavio_2, SOB_1)) +
+  geom_smooth()+
+  geom_point(position = "jitter")+
+    xlim(c(0,100))+
+  ylim(c(0, 100))+
+  labs(subtitle = "Relationship Between Individual Behavior and Impression of Others",
+       y="The UK Would Cancel Social Gatherings",
+       x="Not Attending Social Gatherings",
+       title="Scatterplot")
+
+```

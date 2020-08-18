@@ -1,0 +1,35 @@
+---
+title: "**DACSS 601 / PS601 - Assignment Two**"
+author: "*Mustafa Erdem Kusdil*"
+date: "August 10, 2020"
+output:
+  html_document:
+    df_print: paged
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r myData, include=FALSE}
+
+library(tidyverse)
+
+
+myData <- read.delim("covid-responses.tab", sep= "\t", header = TRUE)
+
+
+
+```
+
+## Italy Covid-19 Survey Dataset
+
+Italy Covid-19 Survey(Mar-18) is a dataset collected by the Covid-19 International Behavioral Science Group. This dataset focuses on the Italian public's attitudes,perceptions, and evaluations regarding the COVID-19 crisis. It helps us understand how people in Italy experience the crisis caused by the novel coronavirus. The study also includes data on respondents' socio-demographic aspects and general characteristics.
+
+The dataset includes `r nrow(myData)` observations and  `r ncol(myData)` variables. Each row in this data represents an individual respondent and columns are questions.
+
+A preview of the dataset can be found below:
+```{r cols.print=5, rows.print=7, echo=FALSE}
+myData
+```
