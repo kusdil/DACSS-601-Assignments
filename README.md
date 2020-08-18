@@ -1,2 +1,2 @@
 # DACSS-601-Assignments
-Assignments
+Homeworks/Assignments
